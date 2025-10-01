@@ -38,6 +38,12 @@
         <activity
             android:name=".AddFundsActivity"
             android:exported="false" />
+        <activity
+            android:name=".BetHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AchievementsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

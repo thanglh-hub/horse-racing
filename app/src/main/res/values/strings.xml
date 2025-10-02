@@ -63,4 +63,8 @@
     <string name="btn_cancel">Cancel</string>
     <string name="msg_invalid_amount">Please enter a valid amount</string>
     <string name="msg_funds_added">Successfully added %d$ to your balance!</string>
+    <string name="btn_withdraw">Rút tiền</string>
+    <string name="msg_insufficient_balance">Số dư không đủ để rút!</string>
+    <string name="msg_funds_withdrawn">Đã rút %1$d VND</string>
+
 </resources>

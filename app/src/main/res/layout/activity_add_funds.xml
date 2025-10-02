@@ -51,6 +51,17 @@
             android:textColor="@android:color/white"/>
 
         <Button
+            android:id="@+id/btn_withdraw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_withdraw"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/holo_red_light"
+            android:textColor="@android:color/white"/>
+
+        <Button
             android:id="@+id/btn_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

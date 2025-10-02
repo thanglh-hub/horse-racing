@@ -1,44 +1,72 @@
 package com.example.horseracing;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementsActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private ListView listViewAhievements;
     private AchievementsAdapter adapter;
-    private final List<Achievement> items = new ArrayList<>();
+    private List<Achievement> achievements;
+    AchievementManager manager = AchievementManager.getInstance();
+    String currentDate = manager.getCurrentDate();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
-        recyclerView = findViewById(R.id.recycler_achievements);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AchievementsAdapter(items);
-        recyclerView.setAdapter(adapter);
+        listViewAhievements = findViewById(R.id.lv_achievements);
 
-        seedMock();
+        setData();
+        adapter = new AchievementsAdapter(this, achievements);
+        listViewAhievements.setAdapter(adapter);
+
+        Button btnBack = findViewById(R.id.btnBackToLobby);
+        btnBack.setOnClickListener(v -> finish());
     }
 
-    private void seedMock() {
-        items.clear();
-        items.add(new Achievement("New Driver", "Win your first race"));
-        items.add(new Achievement("Winning Streak", "Win 3 races in a row"));
-        items.add(new Achievement("Millionaire", "Balance reaches 500"));
-        adapter.notifyDataSetChanged();
+    private void setData() {
+        achievements = new ArrayList<>();
+        achievements.add(new Achievement(
+                "New Driver",
+                "Win your first race",
+                manager.hasFirstWin(),
+                manager.hasFirstWin() ? currentDate : null
+        ));
+
+        achievements.add(new Achievement(
+                "Big Spender",
+                "Bet 500 coins in total",
+                manager.isBigSpender(),
+                manager.isBigSpender() ? currentDate : null
+        ));
+
+        achievements.add(new Achievement(
+                "Unstoppable",
+                "Win 3 races",
+                manager.hasLuckyStreak(),
+                manager.hasLuckyStreak() ? currentDate : null
+        ));
     }
 
-    static class Achievement {
-        final String title; final String desc;
-        Achievement(String title, String desc) { this.title = title; this.desc = desc; }
+    public class Achievement {
+        public final String title;
+        public final String description;
+        final boolean isUnlocked;
+        final String unlockedDate;
+        public Achievement(String title, String description, boolean isUnlocked, String unlockedDate) {
+            this.title = title;
+            this.description = description;
+            this.isUnlocked = isUnlocked;
+            this.unlockedDate = unlockedDate;
+        }
     }
 }
 

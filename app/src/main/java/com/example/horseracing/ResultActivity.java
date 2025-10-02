@@ -27,13 +27,17 @@ public class ResultActivity extends AppCompatActivity {
         int bet = getIntent().getIntExtra("bet", 0);
         int winner = getIntent().getIntExtra("winner", -1);
 
+        BetHistory.AddBetResult(bet, selected, winner);
+
         if (winner == selected) {
             GameState.getInstance().addBalance(bet);
+            AchievementManager.getInstance().onWin(bet);
             resultText.setText(getString(R.string.msg_win, winner));
             // Chỉ phát âm thanh thắng
             com.example.horseracing.data.AudioPlayer.playWinner(this);
         } else {
             GameState.getInstance().addBalance(-bet);
+            AchievementManager.getInstance().onLose(bet);
             resultText.setText(getString(R.string.msg_lose, winner));
             // Chỉ phát âm thanh thua
             com.example.horseracing.data.AudioPlayer.playGameOver(this);

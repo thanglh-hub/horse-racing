@@ -3,12 +3,12 @@ package com.example.horseracing;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class BetHistoryActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private ListView historyView;
     private Spinner spinnerField;
     private Spinner spinnerDir;
     private final List<BetItem> items = new ArrayList<>();
@@ -30,14 +30,13 @@ public class BetHistoryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bet_history);
-
-        recyclerView = findViewById(R.id.recycler_history);
+        Button btnBack = findViewById(R.id.btnBackToLobby);
+        btnBack.setOnClickListener(v -> finish());
+        historyView = findViewById(R.id.lvHistory);
         spinnerField = findViewById(R.id.spinner_sort_field);
         spinnerDir = findViewById(R.id.spinner_sort_dir);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BetHistoryAdapter(items);
-        recyclerView.setAdapter(adapter);
+        adapter = new BetHistoryAdapter(this, items);
+        historyView.setAdapter(adapter);
 
         setupSpinners();
         seedMockData();
@@ -67,11 +66,12 @@ public class BetHistoryActivity extends AppCompatActivity {
 
     private void seedMockData() {
         items.clear();
-        items.add(new BetItem("01/10/2025 10:20", 50, 2, true));
-        items.add(new BetItem("28/09/2025 21:05", 20, 1, false));
-        items.add(new BetItem("30/09/2025 14:32", 80, 3, true));
-        items.add(new BetItem("25/09/2025 09:12", 10, 2, false));
-        items.add(new BetItem("29/09/2025 19:47", 45, 1, true));
+
+        List<BetHistory.BetItem> historyList = BetHistory.getHistoryList();
+        for (BetHistory.BetItem bet : historyList) {
+            items.add(new BetItem(bet.time, bet.amount, bet.horse, bet.win));
+        }
+
     }
 
     private void applySort() {
@@ -103,7 +103,7 @@ public class BetHistoryActivity extends AppCompatActivity {
     }
 
     static class BetItem {
-        final String time; 
+        final String time;
         final int amount;
         final int horse;
         final boolean win;

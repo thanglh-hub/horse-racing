@@ -1,0 +1,214 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Số dư -->
+        <TextView
+            android:id="@+id/text_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_balance_placeholder"
+            android:textSize="20sp"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nạp thêm tiền -->
+        <Button
+            android:id="@+id/btn_add_funds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_add_funds"
+            android:textSize="12sp"
+            android:padding="6dp"
+            android:background="@android:color/holo_green_light"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toTopOf="@id/text_balance"
+            app:layout_constraintBottom_toBottomOf="@id/text_balance"
+            app:layout_constraintStart_toEndOf="@id/text_balance"/>
+
+        <!-- Logout -->
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_logout"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Chọn ngựa -->
+        <RadioGroup
+            android:id="@+id/radio_group_horses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/text_balance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_horse1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/horse_1"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:drawableStart="@drawable/horseblue"
+                android:drawablePadding="12dp"
+                android:background="@drawable/horse_border_blue"/>
+
+            <RadioButton
+                android:id="@+id/rb_horse2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/horse_2"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:drawableStart="@drawable/horseblue"
+                android:drawablePadding="12dp"
+                android:background="@drawable/horse_border_red"/>
+
+            <RadioButton
+                android:id="@+id/rb_horse3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/horse_3"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:drawableStart="@drawable/horseblue"
+                android:drawablePadding="12dp"
+                android:background="@drawable/horse_border_green"/>
+        </RadioGroup>
+
+        <!-- Loại cược -->
+        <TextView
+            android:id="@+id/text_bet_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn loại cược:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/radio_group_horses"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_bet_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/text_bet_type_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_winner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Người thắng"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_top3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top 3" />
+
+            <RadioButton
+                android:id="@+id/rb_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hủy cược"
+                android:textColor="@android:color/holo_red_dark"/>
+        </RadioGroup>
+
+        <!-- Tỉ lệ cược -->
+        <TextView
+            android:id="@+id/text_odds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tỉ lệ cược: -"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/radio_group_bet_type"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Tiền cược -->
+        <TextView
+            android:id="@+id/text_bet_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_bet"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/text_odds"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <SeekBar
+            android:id="@+id/seek_bet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/text_bet_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_bet_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/seek_bet"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Nút Start & Reset -->
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_start"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/text_bet_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_reset"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btn_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

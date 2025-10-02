@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             finish();
         });
-
         registerButton.setOnClickListener(v -> { 
             com.example.horseracing.data.AudioPlayer.playButtonClick(this); 
             doRegister(); 

@@ -28,30 +28,42 @@ public class ResultActivity extends AppCompatActivity {
         String betType = getIntent().getStringExtra("betType");
 
         int winner = getIntent().getIntExtra("winner", -1);
+        int second = getIntent().getIntExtra("second", -1);
         int third = getIntent().getIntExtra("third", -1);
 
         boolean win = false;
         double multiplier = 0;
+        int rank = -1; // thứ hạng ngựa chọn
 
         if ("winner".equals(betType)) {
             if (selected == winner) {
                 win = true;
                 multiplier = 2.0;
+                rank = 1;
             }
         } else if ("top3".equals(betType)) {
-            if (selected == third) {
+            if (selected == winner) {
                 win = true;
                 multiplier = 1.2;
+                rank = 1;
+            } else if (selected == second) {
+                win = true;
+                multiplier = 1.2;
+                rank = 2;
+            } else if (selected == third) {
+                win = true;
+                multiplier = 1.2;
+                rank = 3;
             }
         }
 
         if (win) {
             int reward = (int) (bet * multiplier);
             GameState.getInstance().addBalance(reward);
-            resultText.setText("Bạn thắng! +" + reward + "$");
+            resultText.setText("Bạn thắng! Ngựa số " + selected + " về hạng " + rank + ". +" + reward + "$");
             com.example.horseracing.data.AudioPlayer.playWinner(this);
         } else {
-            resultText.setText("Bạn thua cược!");
+            resultText.setText("Bạn thua cược! Ngựa bạn chọn không về đúng hạng.");
             com.example.horseracing.data.AudioPlayer.playGameOver(this);
         }
 

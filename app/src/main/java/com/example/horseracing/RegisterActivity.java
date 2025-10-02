@@ -1,9 +1,11 @@
 package com.example.horseracing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordInput;
     private EditText confirmPasswordInput;
     private Button registerButton;
-
+    private ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,11 @@ public class RegisterActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.input_password);
         confirmPasswordInput = findViewById(R.id.input_confirm_password);
         registerButton = findViewById(R.id.button_register);
+        btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            finish();
+        });
 
         registerButton.setOnClickListener(v -> { 
             com.example.horseracing.data.AudioPlayer.playButtonClick(this); 

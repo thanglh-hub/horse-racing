@@ -1,5 +1,6 @@
 package com.example.horseracing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,7 +15,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     // UI Components
     private LinearLayout stepEmail, stepOtp, stepPassword;
     private EditText emailInput, otpInput, newPasswordInput, confirmNewPasswordInput;
-    private Button sendOtpBtn, verifyOtpBtn, resetPasswordBtn;
+    private Button sendOtpBtn, verifyOtpBtn, resetPasswordBtn , btnBack;
+
+
     
     // Current step (1, 2, or 3)
     private int currentStep = 1;
@@ -47,6 +50,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         sendOtpBtn = findViewById(R.id.btn_send_otp);
         verifyOtpBtn = findViewById(R.id.btn_verify_otp);
         resetPasswordBtn = findViewById(R.id.btn_reset_password);
+        btnBack = findViewById(R.id.btn_back);
     }
 
     private void setupClickListeners() {
@@ -63,6 +67,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         resetPasswordBtn.setOnClickListener(v -> {
             com.example.horseracing.data.AudioPlayer.playButtonClick(this);
             handleResetPassword();
+        });
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            finish(); // Quay về
         });
     }
 

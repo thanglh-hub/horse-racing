@@ -26,6 +26,8 @@ public class LobbyActivity extends AppCompatActivity {
     private Button resetBtn;
     private Button logoutBtn;
     private Button addFundsBtn;
+    private Button historyBtn;
+    private Button achievementsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class LobbyActivity extends AppCompatActivity {
         resetBtn = findViewById(R.id.btn_reset);
         logoutBtn = findViewById(R.id.btn_logout);
         addFundsBtn = findViewById(R.id.btn_add_funds);
+        historyBtn = findViewById(R.id.btn_history);
+        achievementsBtn = findViewById(R.id.btn_achievements);
 
         updateBalance();
 
@@ -83,6 +87,21 @@ public class LobbyActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddFundsActivity.class);
             startActivity(intent);
         });
+
+        if (historyBtn != null) {
+            historyBtn.setOnClickListener(v -> {
+                com.example.horseracing.data.AudioPlayer.playButtonClick(this);
+                Intent i = new Intent(this, BetHistoryActivity.class);
+                startActivity(i);
+            });
+        }
+        if (achievementsBtn != null) {
+            achievementsBtn.setOnClickListener(v -> {
+                com.example.horseracing.data.AudioPlayer.playButtonClick(this);
+                Intent i = new Intent(this, AchievementsActivity.class);
+                startActivity(i);
+            });
+        }
     }
 
     private void updateBalance() {

@@ -42,22 +42,22 @@ public class ResultActivity extends AppCompatActivity {
                 rank = 1;
             }
         } else if ("top3".equals(betType)) {
-            if (selected == winner) {
+            if (selected == winner || selected == second || selected == third) {
                 win = true;
                 multiplier = 1.2;
-                rank = 1;
-            } else if (selected == second) {
-                win = true;
-                multiplier = 1.2;
-                rank = 2;
-            } else if (selected == third) {
-                win = true;
-                multiplier = 1.2;
-                rank = 3;
+
+                if (selected == winner) {
+                    rank = 1;
+                } else if (selected == second) {
+                    rank = 2;
+                } else {
+                    rank = 3;
+                }
             }
         }
 
-        if (win) {
+
+            if (win) {
             int reward = (int) (bet * multiplier);
             GameState.getInstance().addBalance(reward);
             resultText.setText("Bạn thắng! Ngựa số " + selected + " về hạng " + rank + ". +" + reward + "$");

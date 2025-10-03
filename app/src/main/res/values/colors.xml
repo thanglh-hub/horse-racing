@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_color">#F8F9FA</color>
+    <color name="primary_button_color">#007BFF</color>
+    <color name="primary_text_color">#212529</color>
+    <color name="secondary_text_color">#6C757D</color>
+    <color name="input_stroke_color">#DEE2E6</color>
+    <color name="hint_color">#ADB5BD</color>
+    <color name="icon_tint_color">#6C757D</color>
+    <color name="link_color">#007BFF</color>
+    <color name="divider_color">#DEE2E6</color>
 </resources>

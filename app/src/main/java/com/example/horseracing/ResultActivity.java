@@ -28,7 +28,6 @@ public class ResultActivity extends AppCompatActivity {
         int betH2 = getIntent().getIntExtra("bet_H2", 0);
         int betH3 = getIntent().getIntExtra("bet_H3", 0);
         int[] ranking = getIntent().getIntArrayExtra("ranking");
-
         if (ranking == null || ranking.length < 3) {
             resultText.setText("Lỗi: Không có kết quả!");
 

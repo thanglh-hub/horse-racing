@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView statusText;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Random random = new Random();
-    private int selectedHorse;
-    private int bet;
     private boolean finished = false;
+    private int betH1, betH2, betH3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
         img3 = findViewById(R.id.img_h3);
         statusText = findViewById(R.id.text_status);
 
-        selectedHorse = getIntent().getIntExtra("selectedHorse", -1);
-        bet = getIntent().getIntExtra("bet", 0);
+        betH1 = getIntent().getIntExtra("bet_H1", 0);
+        betH2 = getIntent().getIntExtra("bet_H2", 0);
+        betH3 = getIntent().getIntExtra("bet_H3", 0);
 
         // Tắt nhạc nền và chỉ phát âm thanh đua ngựa
         com.example.horseracing.data.AudioPlayer.stopBgm();
         com.example.horseracing.data.AudioPlayer.playHorseRacing(this);
-        
+
         startRaceLoop();
     }
 
@@ -77,10 +79,15 @@ public class MainActivity extends AppCompatActivity {
                     finished = true;
                     statusText.setText(getString(R.string.msg_horse_won, winner));
                     // Không phát âm thanh ở đây, sẽ phát ở ResultActivity
+                    // Xếp hạng top 1-3
+                    int[] ranking = getRanking();
+
+                    // Gửi sang ResultActivity
                     Intent i = new Intent(MainActivity.this, ResultActivity.class);
-                    i.putExtra("selectedHorse", selectedHorse);
-                    i.putExtra("bet", bet);
-                    i.putExtra("winner", winner);
+                    i.putExtra("bet_H1", betH1);
+                    i.putExtra("bet_H2", betH2);
+                    i.putExtra("bet_H3", betH3);
+                    i.putExtra("ranking", ranking);
                     startActivity(i);
                     finish();
                 } else {
@@ -95,5 +102,15 @@ public class MainActivity extends AppCompatActivity {
         if (horse2.getProgress() >= horse2.getMax()) return 2;
         if (horse3.getProgress() >= horse3.getMax()) return 3;
         return -1;
+    }
+
+    private int[] getRanking(){
+        int[][] horses = {
+                {1, horse1.getProgress()},
+                {2, horse2.getProgress()},
+                {3, horse3.getProgress()}
+        };
+        Arrays.sort(horses, (a, b) -> b[1] - a[1]);
+        return new int[]{horses[0][0],horses[1][0],horses[2][0]};
     }
 }

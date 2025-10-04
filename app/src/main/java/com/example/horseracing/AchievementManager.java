@@ -11,7 +11,7 @@ public class AchievementManager {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 
     private boolean hasFirstWin = false;
-    private boolean isBigSpender = false;
+    private boolean isRichGamer = false;
     private boolean hasLuckyStreak = false;
 
     private int totalBetAmount = 0;
@@ -26,18 +26,14 @@ public class AchievementManager {
         return instance;
     }
 
-    // Gọi khi thắng cược
     public void onWin(int betAmount) {
         totalBetAmount += betAmount;
         currentWinStreak++;
-
         if (!hasFirstWin) {
             hasFirstWin = true;
-
         }
-
-        if (!isBigSpender && totalBetAmount >= 500) {
-            isBigSpender = true;
+        if (!isRichGamer && totalBetAmount >= 100) {
+            isRichGamer = true;
         }
         if (!hasLuckyStreak && currentWinStreak >= 3) {
             hasLuckyStreak = true;
@@ -45,20 +41,12 @@ public class AchievementManager {
     }
 
 
-    public void onLose(int betAmount) {
-        totalBetAmount += betAmount;
-
-        if (!isBigSpender && totalBetAmount >= 500) {
-            isBigSpender = true;
-        }
-    }
-
     public boolean hasFirstWin() {
         return hasFirstWin;
     }
 
-    public boolean isBigSpender() {
-        return isBigSpender;
+    public boolean isRichGamer() {
+        return isRichGamer;
     }
 
     public boolean hasLuckyStreak() {

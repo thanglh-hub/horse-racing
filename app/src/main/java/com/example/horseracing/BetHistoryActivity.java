@@ -69,9 +69,8 @@ public class BetHistoryActivity extends AppCompatActivity {
 
         List<BetHistory.BetItem> historyList = BetHistory.getHistoryList();
         for (BetHistory.BetItem bet : historyList) {
-            items.add(new BetItem(bet.time, bet.amount, bet.horse, bet.win));
+            items.add(new BetItem(bet.time, bet.amount, bet.horse, bet.win, bet.draw));
         }
-
     }
 
     private void applySort() {
@@ -103,12 +102,26 @@ public class BetHistoryActivity extends AppCompatActivity {
     }
 
     static class BetItem {
-        final String time;
+         final String time;
         final int amount;
         final int horse;
         final boolean win;
+        final boolean draw;
+        
         BetItem(String time, int amount, int horse, boolean win) {
-            this.time = time; this.amount = amount; this.horse = horse; this.win = win;
+            this.time = time; 
+            this.amount = amount; 
+            this.horse = horse; 
+            this.win = win;
+            this.draw = false;
+        }
+        
+        BetItem(String time, int amount, int horse, boolean win, boolean draw) {
+            this.time = time; 
+            this.amount = amount; 
+            this.horse = horse; 
+            this.win = win;
+            this.draw = draw;
         }
     }
 }

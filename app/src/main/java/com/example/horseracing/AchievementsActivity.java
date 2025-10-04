@@ -42,10 +42,10 @@ public class AchievementsActivity extends AppCompatActivity {
         ));
 
         achievements.add(new Achievement(
-                "Big Spender",
-                "Bet 500 coins in total",
-                manager.isBigSpender(),
-                manager.isBigSpender() ? currentDate : null
+                "Rich Gamer",
+                "Win 100$ ",
+                manager.isRichGamer(),
+                manager.isRichGamer() ? currentDate : null
         ));
 
         achievements.add(new Achievement(

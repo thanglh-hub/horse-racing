@@ -50,9 +50,20 @@ public class BetHistoryAdapter extends BaseAdapter {
 
         BetHistoryActivity.BetItem item = data.get(position);
         holder.time.setText(item.time);
-        holder.amount.setText((item.win ? "+ " : "- ") + item.amount);
-        holder.detail.setText("Horse " + item.horse + " • Amount " + item.amount + " • " + (item.win ? "Win" : "Lose"));
-        holder.amount.setTextColor(holder.amount.getResources().getColor(item.win ? android.R.color.holo_green_dark : android.R.color.holo_red_dark));
+
+        if (item.win) {
+            holder.amount.setText("+" + item.amount);
+            holder.amount.setTextColor(holder.amount.getResources().getColor(android.R.color.holo_green_dark));
+        } else if (item.draw) {
+            holder.amount.setText("0");
+            holder.amount.setTextColor(holder.amount.getResources().getColor(android.R.color.holo_orange_dark));
+        } else {
+            holder.amount.setText("-" + item.amount);
+            holder.amount.setTextColor(holder.amount.getResources().getColor(android.R.color.holo_red_dark));
+        }
+        
+        String result = item.win ? "Win" : (item.draw ? "Draw" : "Lose");
+        holder.detail.setText("Horse " + item.horse + " • Bet " + item.amount + "$ • " + result);
 
         return convertView;
     }

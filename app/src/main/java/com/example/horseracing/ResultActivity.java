@@ -63,6 +63,22 @@ public class ResultActivity extends AppCompatActivity {
             else if (second == 3) payout += betH3;
         }
 
+        if (betH1 > 0) {
+            boolean isWin = (first == 1);
+            boolean isDraw = (second == 1);
+            BetHistory.AddBetResult(betH1, 1, isWin, isDraw);
+        }
+        if (betH2 > 0) {
+            boolean isWin = (first == 2);
+            boolean isDraw = (second == 2);
+            BetHistory.AddBetResult(betH2, 2, isWin, isDraw);
+        }
+        if (betH3 > 0) {
+            boolean isWin = (first == 3);
+            boolean isDraw = (second == 3);
+            BetHistory.AddBetResult(betH3, 3, isWin, isDraw);
+        }
+
         GameState.getInstance().addBalance(payout);
 
         int netChange = payout - totalBet;
@@ -74,6 +90,7 @@ public class ResultActivity extends AppCompatActivity {
 
         if (netChange > 0) {
             sb.append("Bạn thắng: +").append(netChange);
+            AchievementManager.getInstance().onWin(netChange);
             resultText.setText((sb.toString()));
             com.example.horseracing.data.AudioPlayer.playButtonClick(this);
         } else if (netChange == 0) {

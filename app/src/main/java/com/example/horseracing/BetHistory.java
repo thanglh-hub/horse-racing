@@ -8,25 +8,38 @@ import java.util.Locale;
 
 public class BetHistory {
     public static class BetItem {
-        public final String time;
-        public  final int amount;
-        public final int horse;
-        public final boolean win;
-        public BetItem(String time, int amount, int horse, boolean win) {
-            this.time = time; this.amount = amount; this.horse = horse; this.win = win;
+        final String time;
+        final int amount;
+        final int horse;
+        final boolean win;
+        final boolean draw; 
+        
+        BetItem(String time, int amount, int horse, boolean win) {
+            this.time = time; 
+            this.amount = amount; 
+            this.horse = horse; 
+            this.win = win;
+            this.draw = false;
+        }
+        
+        BetItem(String time, int amount, int horse, boolean win, boolean draw) {
+            this.time = time; 
+            this.amount = amount; 
+            this.horse = horse; 
+            this.win = win;
+            this.draw = draw;
         }
     }
 
     public static final List<BetItem> historyList = new ArrayList<>();
     private static  final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 
-    public static void AddBetResult(int amount, int selectedHorse, int winner) {
+    
+    public static void AddBetResult(int amount, int selectedHorse, boolean isWin, boolean isDraw) {
         String currentTime = dateFormat.format(new Date());
-        boolean isWin = (selectedHorse == winner);
-        BetItem item = new BetItem(currentTime, amount, selectedHorse, isWin);
-        historyList.add(0,item);
+        BetItem item = new BetItem(currentTime, amount, selectedHorse, isWin, isDraw);
+        historyList.add(0, item);
     }
-
     public static List<BetItem> getHistoryList(){
         return new ArrayList<>(historyList);
     }

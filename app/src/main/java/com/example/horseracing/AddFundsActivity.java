@@ -12,6 +12,7 @@ public class AddFundsActivity extends AppCompatActivity {
     private EditText editAmount;
     private Button btnConfirm;
     private Button btnCancel;
+    private Button btnViewDepositHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class AddFundsActivity extends AppCompatActivity {
         editAmount = findViewById(R.id.edit_amount);
         btnConfirm = findViewById(R.id.btn_confirm);
         btnCancel = findViewById(R.id.btn_cancel);
+        btnViewDepositHistory = findViewById(R.id.btn_view_deposit_history);
 
         btnConfirm.setOnClickListener(v -> {
             com.example.horseracing.data.AudioPlayer.playButtonClick(this);
@@ -30,6 +32,11 @@ public class AddFundsActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(v -> {
             com.example.horseracing.data.AudioPlayer.playButtonClick(this);
             finish();
+        });
+
+        btnViewDepositHistory.setOnClickListener(v -> {
+            com.example.horseracing.data.AudioPlayer.playButtonClick(this);
+            startActivity(new android.content.Intent(this, DepositHistoryActivity.class));
         });
     }
 
@@ -53,9 +60,11 @@ public class AddFundsActivity extends AppCompatActivity {
             GameState gameState = GameState.getInstance();
             gameState.addBalance(amount);
 
+            // Lưu lịch sử nạp tiền
+            DepositHistoryActivity.addDepositHistory(this, amount);
+
             // Hiển thị thông báo thành công
             Toast.makeText(this, getString(R.string.msg_funds_added, amount), Toast.LENGTH_LONG).show();
-            
             // Đóng activity và quay về Lobby
             finish();
 

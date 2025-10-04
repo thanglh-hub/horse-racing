@@ -32,6 +32,27 @@
         android:padding="16dp"
         android:background="@android:drawable/edit_text"
         android:layout_marginBottom="32dp"/>
+    <Button
+        android:id="@+id/btn_view_deposit_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Deposit History"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="15dp"/>
+    <Button
+        android:id="@+id/btn_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_withdraw"
+        android:textSize="16sp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="15dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,5 +83,7 @@
             android:textColor="@android:color/white"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

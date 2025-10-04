@@ -44,6 +44,9 @@
         <activity
             android:name=".AchievementsActivity"
             android:exported="false" />
+        <activity
+            android:name=".DepositHistoryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

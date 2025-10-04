@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HorseRacing">
         <activity
+            android:name=".RiderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RaceListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultActivity"
             android:exported="false" />
         <activity

@@ -29,6 +29,19 @@ public class LobbyActivity extends AppCompatActivity {
         // Play background music
         com.example.horseracing.data.AudioPlayer.playBgm(this);
 
+        Button btnRaces = findViewById(R.id.btnRaces);
+        Button btnProfiles = findViewById(R.id.btnProfiles);
+
+        btnRaces.setOnClickListener(v -> {
+            Intent i = new Intent(LobbyActivity.this, RaceListActivity.class);
+            startActivity(i);
+        });
+
+        btnProfiles.setOnClickListener(v -> {
+            Intent i = new Intent(LobbyActivity.this, RiderListActivity.class);
+            startActivity(i);
+        });
+
         // --- Ánh xạ UI ---
         balanceText = findViewById(R.id.text_balance);
         betValue = findViewById(R.id.text_bet_value);

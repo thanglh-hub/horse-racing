@@ -49,36 +49,21 @@ public class AddFundsActivity extends AppCompatActivity {
 
     private void handleAddFunds() {
         String amountStr = editAmount.getText().toString().trim();
-        
         if (amountStr.isEmpty()) {
             Toast.makeText(this, getString(R.string.msg_invalid_amount), Toast.LENGTH_SHORT).show();
             return;
         }
-
         try {
             int amount = Integer.parseInt(amountStr);
-            
             if (amount <= 0) {
                 Toast.makeText(this, getString(R.string.msg_invalid_amount), Toast.LENGTH_SHORT).show();
                 return;
             }
-
-            // Thêm tiền vào GameState
             GameState gameState = GameState.getInstance();
             gameState.addBalance(amount);
-
-            gameState.addBalance(-amount); // Trừ tiền
-            Toast.makeText(this, getString(R.string.msg_funds_withdrawn, amount), Toast.LENGTH_LONG).show();
-            finish();
-
-            // Lưu lịch sử nạp tiền
-            DepositHistoryActivity.addDepositHistory(this, amount);
-
-            // Hiển thị thông báo thành công
+            DepositHistoryActivity.addTransactionHistory(this, amount, "deposit");
             Toast.makeText(this, getString(R.string.msg_funds_added, amount), Toast.LENGTH_LONG).show();
-            // Đóng activity và quay về Lobby
             finish();
-
         } catch (NumberFormatException e) {
             Toast.makeText(this, getString(R.string.msg_invalid_amount), Toast.LENGTH_SHORT).show();
         }
@@ -102,6 +87,7 @@ public class AddFundsActivity extends AppCompatActivity {
                 return;
             }
             gameState.addBalance(-amount);
+            DepositHistoryActivity.addTransactionHistory(this, amount, "withdraw");
             Toast.makeText(this, getString(R.string.msg_funds_withdrawn, amount), Toast.LENGTH_LONG).show();
             finish();
         } catch (NumberFormatException e) {
